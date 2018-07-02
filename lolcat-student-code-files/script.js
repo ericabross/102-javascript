@@ -4,20 +4,23 @@ var wakeupTime = 9; // 9AM
 var lunchTime = 12; // 12PM
 var partyTime = 17; // 5PM
 var napTime = lunchTime + 2; // 2PM
-
 var time = new Date().getHours();
 
-var partyTimeButton = document.getElementById ("partyTimeButton");
+var partyTimeButton = document.getElementById("partyTimeButton");
 var isPartyTime = false;
 
-var updateClock = function ()
-{
+var wakeUpTimeSelector = document.getElementById("wakeUpTimeSelector");
+var lunchTimeSelector = document.getElementById("lunchTimeSelector");
+var napTimeSelector = document.getElementById("napTimeSelector");
+
+
+var updateClock = function() {
     var lolcat = document.getElementById('lolcat');
     var message = document.getElementById("timeEvent");
     var messageText; 
     var image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat5.jpg";
 
-    if (time == partyTime){
+    if (time == partyTime) {
         messageText = "IZ PARTEE TIME!!";
         image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat4.jpg";
     } 
@@ -43,10 +46,10 @@ var updateClock = function ()
         messageText = "Good afternoon!";
     }
 
-    message.innertext = messageText; 
+    message.innerText = messageText; 
     lolcat.src = image;
 
-    showCurrentTime ();
+    showCurrentTime();
 
 };
 
@@ -93,9 +96,9 @@ var showCurrentTime = function()
 updateClock();
 
 var oneSecond = 1000;
-setInterval ( updateClock, oneSecond);
+setInterval(updateClock, oneSecond);
 
-var partyEvent = function ()
+var partyEvent = function()
 {
    if (isPartyTime === false) {
       isPartyTime = true;
@@ -112,4 +115,24 @@ var partyEvent = function ()
     }
 };
 
-partyTimeButton.addEventListener ("click", partyEvent);
+var wakeUpEvent = function()
+{
+    wakeupTime = wakeUpTimeSelector.value;
+};
+
+var lunchEvent = function()
+{
+    lunchTime = lunchTimeSelector.value;
+};
+
+var napEvent = function()
+{
+    napTime = napTimeSelector.value;
+};
+
+partyTimeButton.addEventListener("click", partyEvent);
+
+wakeUpTimeSelector.addEventListener("change", wakeUpEvent);
+lunchTimeSelector.addEventListener("change", lunchEvent);
+napTimeSelector.addEventListener("change", napEvent);
+
