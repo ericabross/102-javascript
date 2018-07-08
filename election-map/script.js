@@ -47,6 +47,32 @@ var setStateResults = function (state) {
    } else {
      theStates[state].rgbColor = [11, 32, 57];
    }
+  
+  var stateInfoTable = document.getElementById('stateResults');
+  var header = stateInfoTable.children[0];
+  var body = stateInfoTable.children[1];
+  var stateName = header.children[0].children[0];
+  var abbrev = header.children[0].children[1];
+  var candidate1Name = body.children[0].children[0];
+  var candidate2Name = body.children[1].children[0];
+  var candidate1Results = body.children[0].children[1];
+  var candidate2Results = body.children[1].children[1];
+  var winnersName = body.children[2].children[1];
+  
+  stateName.innerText = theStates[state].nameFull;
+  abbrev.innerText = "(" + theStates[state].nameAbbrev + ")";
+  
+  candidate1Name.innerText = dorinda.name;
+  candidate2Name.innerText = erika.name;
+  
+  candidate1Results.innerText = dorinda.electionResults[state];
+  candidate2Results.innerText = erika.electionResults[state];
+  
+  if (theStates[state].winner === null) {
+    winnersName.innerText = "DRAW";
+  } else {
+    winnersName.innerText = theStates[state].winner.name;
+  }
 };
 
 dorinda.tallyUpTotalVotes();
@@ -64,5 +90,12 @@ else {
   winner = "DRAW."
 };
 
+var countryInfoTable = document.getElementById('countryResults');
+var row = countryInfoTable.children[0].children[0];
 
- console.log ();
+row.children[0].innerText = dorinda.name;
+row.children[1].innerText = dorinda.totalVotes;
+row.children[2].innerText = erika.name;
+row.children[3].innerText = erika.totalVotes;
+row.children[5].innerText = winner;
+
