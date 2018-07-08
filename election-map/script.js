@@ -5,8 +5,15 @@ var createPolitician = function (name) {
   politician.electionResults = null;
   politician.totalVotes = 0;
   
+  politician.tallyUpTotalVotes = function () {
+    this.totalVotes = 0;
+    for (var i = 0; i < this.electionResults.length; i++){
+      this.totalVotes = this.totalVotes + this.electionResults[i]; 
+    };
+  };
+  
   return politician;
-}
+};
 
 var dorinda = createPolitician ("Dorinda Medley");
 var erika = createPolitician ("Erika Jayne");
@@ -22,3 +29,18 @@ erika.electionResults [4] = 38;
 
 dorinda.electionResults [43] = 11;
 erika.electionResults [43] = 27;
+
+dorinda.tallyUpTotalVotes();
+erika.tallyUpTotalVotes();
+
+var winner =""; 
+
+if (dorinda.totalVotes > erika.totalVotes){
+  winner = dorinda.name;
+}
+else if (dorinda.totalVotes < erika.totalVotes) {
+  winner = erika.name;
+}
+else {
+  winner = "DRAW."
+};
